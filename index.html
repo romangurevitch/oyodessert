@@ -30,17 +30,17 @@
 <body class="h-full bg-black/90 text-white font-sans">
   <!-- HEADER -->
   <header class="absolute inset-x-0 top-0 z-30">
-    <div class="max-w-6xl mx-auto px-5 md:px-8 py-5 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <img alt="OyO Dessert logo" class="w-10 h-10 rounded-xl bg-white/80 ring-1 ring-white/60 shadow object-cover"
+    <div class="max-w-6xl mx-auto px-5 md:px-8 py-6 md:py-10 flex items-center justify-center">
+      <div class="group cursor-default">
+        <img alt="OyO Dessert logo" class="w-32 h-32 md:w-40 md:h-40 lg:w-44 lg:h-44 rounded-3xl md:rounded-[2rem] bg-white/98 ring-3 ring-white/80 shadow-2xl object-cover backdrop-blur-sm transform group-hover:scale-105 transition-transform duration-500 ease-out"
              src="./assets/images/logo.png" />
-        <span class="hidden sm:inline-flex items-center gap-2 text-[12px] font-semibold text-black/70 bg-white/80 ring-1 ring-white/60 backdrop-blur px-3 py-1 rounded-full">Sydney · Small‑batch</span>
+        <div class="absolute inset-0 rounded-3xl md:rounded-[2rem] bg-gradient-to-t from-black/10 via-transparent to-white/10 opacity-60"></div>
       </div>
     </div>
   </header>
 
   <!-- HERO -->
-  <main class="relative h-svh min-h-[640px] overflow-hidden">
+  <main class="relative h-svh min-h-[640px] overflow-hidden flex flex-col">
     <!-- Slides -->
     <div class="absolute inset-0 -z-10" id="slides" aria-hidden="true">
       <img class="slide absolute inset-0 w-full h-full object-cover opacity-0" src="./assets/images/IMG_1.webp" alt="Dessert 1">
@@ -53,50 +53,78 @@
     </div>
 
     <!-- Center message -->
-    <section class="relative h-full flex items-center justify-center text-center px-6">
+    <section class="relative flex-1 flex items-center justify-center text-center px-6">
       <div class="max-w-3xl mx-auto space-y-6 animate-fadeIn">
         <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight drop-shadow-[0_6px_30px_rgba(0,0,0,.35)]">Coming Soon</h1>
         <p class="text-lg md:text-xl text-white/90 leading-relaxed drop-shadow-[0_6px_30px_rgba(0,0,0,.35)]">
-          We’re baking our online shop. In the meantime, visit us & <span class="font-semibold">order & pickup</span> your favourites at our pop‑ups.
+          Our online shop is in the oven! While we perfect the recipe, find us at Sydney markets for <span class="font-semibold">fresh treats & takeaway</span> delights.
         </p>
         <!-- Events -->
         <div class="mx-auto max-w-xl text-left">
-          <ul class="grid gap-3">
-            <li class="flex items-center gap-3 bg-white/10 backdrop-blur rounded-xl px-4 py-3 ring-1 ring-white/15 shadow-glow">
-              <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-white/80 text-black font-bold">6</span>
-              <div class="leading-tight">
-                <div class="font-semibold">September — Southpoint Shopping Centre</div>
-                <div class="text-sm text-white/80">10:00–16:00</div>
-              </div>
+          <ul class="grid gap-4">
+            <li class="group">
+              <a href="https://www.google.com/maps/search/Southpoint+Shopping+Centre+Sydney" target="_blank" rel="noopener" class="flex items-start gap-4 bg-white/20 backdrop-blur rounded-xl px-5 py-4 ring-1 ring-white/30 shadow-glow hover:bg-white/30 hover:ring-white/40 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                <div class="flex flex-col items-center min-w-[60px] text-center">
+                  <span class="text-xs font-medium text-white/70 uppercase tracking-wide">Sep</span>
+                  <span class="text-2xl font-bold text-white leading-none">6</span>
+                </div>
+                <div class="flex-1 space-y-1">
+                  <div class="text-lg font-semibold text-white leading-tight group-hover:text-white/90">Southpoint Shopping Centre</div>
+                  <div class="text-white/85 text-base font-medium">9:00 AM – 4:00 PM</div>
+                  <div class="text-xs text-white/60 group-hover:text-white/80 transition-colors">📍 Click for directions</div>
+                </div>
+              </a>
             </li>
-            <li class="flex items-center gap-3 bg-white/10 backdrop-blur rounded-xl px-4 py-3 ring-1 ring-white/15 shadow-glow">
-              <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-white/80 text-black font-bold">14</span>
-              <div class="leading-tight">
-                <div class="font-semibold">September — Kirribilli Markets</div>
-                <div class="text-sm text-white/80">08:30–15:00</div>
-              </div>
+            <li class="group">
+              <a href="https://www.google.com/maps/search/Kirribilli+Markets+Sydney" target="_blank" rel="noopener" class="flex items-start gap-4 bg-white/20 backdrop-blur rounded-xl px-5 py-4 ring-1 ring-white/30 shadow-glow hover:bg-white/30 hover:ring-white/40 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                <div class="flex flex-col items-center min-w-[60px] text-center">
+                  <span class="text-xs font-medium text-white/70 uppercase tracking-wide">Sep</span>
+                  <span class="text-2xl font-bold text-white leading-none">14</span>
+                </div>
+                <div class="flex-1 space-y-1">
+                  <div class="text-lg font-semibold text-white leading-tight group-hover:text-white/90">Kirribilli Markets</div>
+                  <div class="text-white/85 text-base font-medium">8:30 AM – 3:00 PM</div>
+                  <div class="text-xs text-white/60 group-hover:text-white/80 transition-colors">📍 Click for directions</div>
+                </div>
+              </a>
             </li>
           </ul>
         </div>
+        
+        <!-- Early orders note -->
+        <div class="text-center max-w-md mx-auto">
+          <p class="text-sm text-white/85 leading-relaxed">
+            💬 Want to secure your favourites? <span class="font-semibold text-white">Message us for early orders</span> — pickup at our events!
+          </p>
+        </div>
+        
         <!-- Socials -->
-        <div class="pt-2 flex items-center justify-center gap-3">
-          <a class="group inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white/90 text-black hover:bg-white shadow-lg ring-1 ring-black/10 transition" href="https://www.instagram.com/oyo_dessert_syd" target="_blank" rel="noopener">
+        <div class="pt-2 flex items-center justify-center gap-4">
+          <a class="group relative inline-flex items-center gap-3 px-6 py-4 rounded-2xl bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:from-purple-600 hover:to-pink-600 shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300" href="https://www.instagram.com/oyo_dessert_syd" target="_blank" rel="noopener">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
             <span class="font-semibold">Instagram</span>
+            <div class="absolute inset-0 bg-white/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </a>
-          <a class="group inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white/90 text-black hover:bg-white shadow-lg ring-1 ring-black/10 transition" href="https://www.facebook.com/oyodessert" target="_blank" rel="noopener">
+          <a class="group relative inline-flex items-center gap-3 px-6 py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800 shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300" href="https://www.facebook.com/oyodessert" target="_blank" rel="noopener">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
             <span class="font-semibold">Facebook</span>
+            <div class="absolute inset-0 bg-white/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </a>
         </div>
       </div>
     </section>
-  </main>
 
-  <!-- FOOTER -->
-  <footer class="relative z-10">
-    <div class="max-w-6xl mx-auto px-6 py-6 text-center text-white/80 text-sm">
-      © <span id="year"></span> OyO Dessert · Sydney, Australia
-    </div>
-  </footer>
+    <!-- FOOTER -->
+    <footer class="relative z-10 mt-auto">
+      <div class="max-w-6xl mx-auto px-6 py-6 text-center text-white/80 text-sm">
+        © <span id="year"></span> OyO Dessert · Sydney, Australia
+      </div>
+    </footer>
+  </main>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
