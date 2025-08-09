@@ -28,16 +28,6 @@
   </style>
 </head>
 <body class="h-full bg-black/90 text-white font-sans">
-  <!-- HEADER -->
-  <header class="absolute inset-x-0 top-0 z-30 pointer-events-none">
-    <div class="max-w-6xl mx-auto px-4 py-4 md:px-8 md:py-8 flex items-center justify-center">
-      <div class="group cursor-default pointer-events-auto">
-        <img alt="OyO Dessert logo" class="w-20 h-20 md:w-32 md:h-32 lg:w-36 lg:h-36 rounded-2xl md:rounded-3xl bg-white/95 ring-2 ring-white/60 shadow-xl object-cover backdrop-blur-sm transform group-hover:scale-105 transition-all duration-500 ease-out hover:shadow-2xl"
-             src="./assets/images/logo.png" />
-        <div class="absolute inset-0 rounded-2xl md:rounded-3xl bg-gradient-to-t from-black/5 via-transparent to-white/5 opacity-30 group-hover:opacity-50 transition-opacity duration-500"></div>
-      </div>
-    </div>
-  </header>
 
   <!-- HERO -->
   <main class="relative min-h-screen overflow-hidden flex flex-col">
@@ -47,8 +37,17 @@
     </div>
 
     <!-- Center message -->
-    <section class="relative flex-1 flex items-center justify-center text-center px-4 pt-24 md:pt-0 md:px-6">
-      <div class="max-w-3xl mx-auto space-y-4 md:space-y-6 animate-fadeIn">
+    <section class="relative flex-1 flex items-center justify-center text-center px-4 py-8 md:px-6">
+      <div class="max-w-3xl mx-auto space-y-6 md:space-y-8 animate-fadeIn">
+        <!-- Logo -->
+        <div class="flex justify-center">
+          <div class="group cursor-default">
+            <img alt="OyO Dessert logo" class="w-24 h-24 md:w-32 md:h-32 lg:w-36 lg:h-36 rounded-2xl md:rounded-3xl bg-white/95 ring-2 ring-white/70 shadow-2xl object-cover backdrop-blur-sm transform group-hover:scale-105 transition-all duration-500 ease-out hover:shadow-3xl"
+                 src="./assets/images/logo.png" />
+            <div class="absolute inset-0 rounded-2xl md:rounded-3xl bg-gradient-to-t from-black/5 via-transparent to-white/5 opacity-30 group-hover:opacity-50 transition-opacity duration-500"></div>
+          </div>
+        </div>
+        
         <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight drop-shadow-[0_6px_30px_rgba(0,0,0,.35)]">Coming Soon</h1>
         <p class="text-lg md:text-xl text-white/90 leading-relaxed drop-shadow-[0_6px_30px_rgba(0,0,0,.35)]">
           Our online shop is in the oven! While we perfect the recipe, find us at Sydney markets for <span class="font-semibold">fresh treats & takeaway</span> delights.
