@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en-AU" class="scroll-smooth h-full">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OyO Dessert — Coming Soon (Sydney)</title>
+  <meta name="description" content="Small‑batch cheesecakes, tarts & treats — baked in Sydney. Order & pickup at our pop‑ups." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { cream: '#FFF8F0', blush: '#F8E3E7', caramel: '#C28B6A', cocoa: '#3B2E2A', charcoal: '#222', pistachio: '#B5C98A', berry: '#C24655' },
+          fontFamily: { sans: ['Inter','ui-sans-serif','system-ui','sans-serif'] },
+          keyframes: { fade: { '0%':{opacity:0}, '100%':{opacity:1} }, zoom: { '0%':{ transform:'scale(1)' }, '100%':{ transform:'scale(1.12)'} } },
+          animation: { fadeIn: 'fade .8s ease-out both', kenburns: 'zoom 14s ease-in-out both' },
+          boxShadow: { glow: '0 12px 40px rgba(194,139,106,.28)' }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root { color-scheme: light; }
+    @media (prefers-reduced-motion: reduce){ *{ animation:none !important; transition:none !important } }
+  </style>
+</head>
+<body class="h-full bg-black/90 text-white font-sans">
+  <!-- HEADER -->
+  <header class="absolute inset-x-0 top-0 z-30">
+    <div class="max-w-6xl mx-auto px-5 md:px-8 py-5 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <img alt="OyO Dessert logo" class="w-10 h-10 rounded-xl bg-white/80 ring-1 ring-white/60 shadow object-cover"
+             src="./assets/images/logo.png" />
+        <span class="hidden sm:inline-flex items-center gap-2 text-[12px] font-semibold text-black/70 bg-white/80 ring-1 ring-white/60 backdrop-blur px-3 py-1 rounded-full">Sydney · Small‑batch</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <main class="relative h-svh min-h-[640px] overflow-hidden">
+    <!-- Slides -->
+    <div class="absolute inset-0 -z-10" id="slides" aria-hidden="true">
+      <img class="slide absolute inset-0 w-full h-full object-cover opacity-0" src="./assets/images/IMG_1.webp" alt="Dessert 1">
+      <img class="slide absolute inset-0 w-full h-full object-cover opacity-0" src="./assets/images/IMG_2.webp" alt="Dessert 2">
+      <img class="slide absolute inset-0 w-full h-full object-cover opacity-0" src="./assets/images/IMG_3.webp" alt="Dessert 3">
+      <img class="slide absolute inset-0 w-full h-full object-cover opacity-0" src="./assets/images/IMG_4.webp" alt="Dessert 4">
+      <img class="slide absolute inset-0 w-full h-full object-cover opacity-0" src="./assets/images/IMG_5.webp" alt="Dessert 5">
+      <img class="slide absolute inset-0 w-full h-full object-cover opacity-0" src="./assets/images/IMG_6.webp" alt="Dessert 6">
+      <div class="absolute inset-0 bg-black/60"></div>
+    </div>
+
+    <!-- Center message -->
+    <section class="relative h-full flex items-center justify-center text-center px-6">
+      <div class="max-w-3xl mx-auto space-y-6 animate-fadeIn">
+        <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight drop-shadow-[0_6px_30px_rgba(0,0,0,.35)]">Coming Soon</h1>
+        <p class="text-lg md:text-xl text-white/90 leading-relaxed drop-shadow-[0_6px_30px_rgba(0,0,0,.35)]">
+          We’re baking our online shop. In the meantime, visit us & <span class="font-semibold">order & pickup</span> your favourites at our pop‑ups.
+        </p>
+        <!-- Events -->
+        <div class="mx-auto max-w-xl text-left">
+          <ul class="grid gap-3">
+            <li class="flex items-center gap-3 bg-white/10 backdrop-blur rounded-xl px-4 py-3 ring-1 ring-white/15 shadow-glow">
+              <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-white/80 text-black font-bold">6</span>
+              <div class="leading-tight">
+                <div class="font-semibold">September — Southpoint Shopping Centre</div>
+                <div class="text-sm text-white/80">10:00–16:00</div>
+              </div>
+            </li>
+            <li class="flex items-center gap-3 bg-white/10 backdrop-blur rounded-xl px-4 py-3 ring-1 ring-white/15 shadow-glow">
+              <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-white/80 text-black font-bold">14</span>
+              <div class="leading-tight">
+                <div class="font-semibold">September — Kirribilli Markets</div>
+                <div class="text-sm text-white/80">08:30–15:00</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <!-- Socials -->
+        <div class="pt-2 flex items-center justify-center gap-3">
+          <a class="group inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white/90 text-black hover:bg-white shadow-lg ring-1 ring-black/10 transition" href="https://www.instagram.com/oyo_dessert_syd" target="_blank" rel="noopener">
+            <span class="font-semibold">Instagram</span>
+          </a>
+          <a class="group inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white/90 text-black hover:bg-white shadow-lg ring-1 ring-black/10 transition" href="https://www.facebook.com/oyodessert" target="_blank" rel="noopener">
+            <span class="font-semibold">Facebook</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="relative z-10">
+    <div class="max-w-6xl mx-auto px-6 py-6 text-center text-white/80 text-sm">
+      © <span id="year"></span> OyO Dessert · Sydney, Australia
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const slides = Array.from(document.querySelectorAll('.slide'))
+    let i = -1
+    function cycle(){
+      const prev = slides[i]
+      i = (i + 1) % slides.length
+      const next = slides[i]
+      if(prev) prev.style.opacity = 0
+      if(next){
+        next.style.opacity = 1
+        next.style.transition = 'opacity 1.2s ease'
+        next.style.animation = 'zoom 14s ease-in-out both'
+      }
+    }
+    cycle()
+    setInterval(cycle, 6000)
+  </script>
+</body>
+</html>
