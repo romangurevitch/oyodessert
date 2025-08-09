@@ -30,32 +30,32 @@
 <body class="h-full bg-black/90 text-white font-sans">
   <!-- HEADER -->
   <header class="absolute inset-x-0 top-0 z-30 pointer-events-none">
-    <div class="max-w-6xl mx-auto px-5 md:px-8 py-8 md:py-12 flex items-center justify-center">
+    <div class="max-w-6xl mx-auto px-4 py-4 md:px-8 md:py-8 flex items-center justify-center">
       <div class="group cursor-default pointer-events-auto">
-        <img alt="OyO Dessert logo" class="w-36 h-36 md:w-44 md:h-44 lg:w-48 lg:h-48 rounded-3xl md:rounded-[2rem] bg-white/95 ring-2 ring-white/60 shadow-2xl object-cover backdrop-blur-sm transform group-hover:scale-105 transition-all duration-500 ease-out hover:shadow-3xl"
+        <img alt="OyO Dessert logo" class="w-20 h-20 md:w-32 md:h-32 lg:w-36 lg:h-36 rounded-2xl md:rounded-3xl bg-white/95 ring-2 ring-white/60 shadow-xl object-cover backdrop-blur-sm transform group-hover:scale-105 transition-all duration-500 ease-out hover:shadow-2xl"
              src="./assets/images/logo.png" />
-        <div class="absolute inset-0 rounded-3xl md:rounded-[2rem] bg-gradient-to-t from-black/5 via-transparent to-white/5 opacity-40 group-hover:opacity-60 transition-opacity duration-500"></div>
+        <div class="absolute inset-0 rounded-2xl md:rounded-3xl bg-gradient-to-t from-black/5 via-transparent to-white/5 opacity-30 group-hover:opacity-50 transition-opacity duration-500"></div>
       </div>
     </div>
   </header>
 
   <!-- HERO -->
-  <main class="relative h-svh min-h-[640px] overflow-hidden flex flex-col">
+  <main class="relative min-h-screen overflow-hidden flex flex-col">
     <!-- Slides -->
     <div class="absolute inset-0 -z-10" id="slides" aria-hidden="true">
       <!-- Slideshow images will be generated dynamically from SLIDESHOW_IMAGES configuration -->
     </div>
 
     <!-- Center message -->
-    <section class="relative flex-1 flex items-center justify-center text-center px-6">
-      <div class="max-w-3xl mx-auto space-y-6 animate-fadeIn">
-        <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight drop-shadow-[0_6px_30px_rgba(0,0,0,.35)]">Coming Soon</h1>
+    <section class="relative flex-1 flex items-center justify-center text-center px-4 pt-24 md:pt-0 md:px-6">
+      <div class="max-w-3xl mx-auto space-y-4 md:space-y-6 animate-fadeIn">
+        <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight drop-shadow-[0_6px_30px_rgba(0,0,0,.35)]">Coming Soon</h1>
         <p class="text-lg md:text-xl text-white/90 leading-relaxed drop-shadow-[0_6px_30px_rgba(0,0,0,.35)]">
           Our online shop is in the oven! While we perfect the recipe, find us at Sydney markets for <span class="font-semibold">fresh treats & takeaway</span> delights.
         </p>
         <!-- Events -->
         <div class="mx-auto max-w-xl text-left">
-          <ul class="grid gap-4" id="events-list">
+          <ul class="grid gap-3 md:gap-4" id="events-list">
             <!-- Events will be generated dynamically from EVENTS configuration -->
           </ul>
         </div>
@@ -68,7 +68,7 @@
         </div>
         
         <!-- Socials -->
-        <div class="pt-2 flex items-center justify-center gap-4">
+        <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4">
           <a class="group relative inline-flex items-center gap-3 px-6 py-4 rounded-2xl bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:from-purple-600 hover:to-pink-600 shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300" href="https://www.instagram.com/oyo_dessert_syd" target="_blank" rel="noopener">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
@@ -89,7 +89,7 @@
 
     <!-- FOOTER -->
     <footer class="relative z-10 mt-auto">
-      <div class="max-w-6xl mx-auto px-6 py-6 text-center text-white/80 text-sm">
+      <div class="max-w-6xl mx-auto px-4 py-4 md:px-6 md:py-6 text-center text-white/80 text-xs md:text-sm">
         © <span id="year"></span> OyO Dessert · Sydney, Australia
       </div>
     </footer>
