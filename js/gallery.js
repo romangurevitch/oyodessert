@@ -172,7 +172,6 @@ class OyoApp {
     }
 
     async _initializeGallery() {
-        this.renderer.showLoadingSkeleton();
 
         const images = await this.imageDetector.detectAvailableImages();
         
