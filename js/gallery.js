@@ -52,11 +52,11 @@ class SlideshowRenderer {
         if (!this.container) return;
 
         const slidesHTML = images.map((img, index) =>
-            `<img class="absolute inset-0 w-full h-full object-cover opacity-0" 
+            `<img class="absolute inset-0 w-full h-full object-cover" 
             src="./assets/images/${img}" 
             alt="OyO Dessert"
             loading="${index === 0 ? 'eager' : 'lazy'}"
-            style="transition: opacity 1s ease;">`
+            style="opacity: 0; transition: none;">`
         ).join('');
 
         this.container.innerHTML = slidesHTML + '<div class="absolute inset-0 bg-black/60"></div>';
@@ -73,8 +73,12 @@ class SlideshowRenderer {
     }
 
     _showFirstSlide(slide) {
-        slide.style.opacity = '1';
-        slide.style.animation = 'zoom 14s ease-in-out both';
+        slide.style.transition = 'opacity 2s ease-out';
+        // Force browser to apply transition before changing opacity
+        setTimeout(() => {
+            slide.style.opacity = '1';
+            slide.style.animation = 'zoom 14s ease-in-out both';
+        }, 50);
     }
 
     showLoadingSkeleton() {
@@ -172,7 +176,6 @@ class OyoApp {
     }
 
     async _initializeGallery() {
-
         const images = await this.imageDetector.detectAvailableImages();
         
         if (images.length === 0) {
