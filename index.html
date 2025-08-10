@@ -5,9 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>OyO Dessert — Coming Soon (Sydney)</title>
   <meta name="description" content="Small‑batch cheesecakes, tarts & treats — baked in Sydney. Order & pickup at our pop‑ups." />
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- TailwindCSS for rapid development -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -22,10 +25,9 @@
       }
     }
   </script>
-  <style>
-    :root { color-scheme: light; }
-    @media (prefers-reduced-motion: reduce){ *{ animation:none !important; transition:none !important } }
-  </style>
+  
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body class="h-full bg-black/90 text-white font-sans">
 
@@ -33,12 +35,13 @@
   <main class="relative min-h-screen overflow-hidden flex flex-col">
     <!-- Slides -->
     <div class="absolute inset-0 -z-10" id="slides" aria-hidden="true">
-      <!-- Slideshow images will be generated dynamically from SLIDESHOW_IMAGES configuration -->
+      <!-- Background slideshow images will be loaded here -->
     </div>
 
     <!-- Center message -->
     <section class="relative flex-1 flex items-center justify-center text-center px-4 py-8 md:px-6">
       <div class="max-w-3xl mx-auto space-y-6 md:space-y-8 animate-fadeIn">
+        
         <!-- Logo -->
         <div class="flex justify-center">
           <div class="group cursor-default">
@@ -48,14 +51,21 @@
           </div>
         </div>
         
-        <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight drop-shadow-[0_6px_30px_rgba(0,0,0,.35)]">Coming Soon</h1>
+        <!-- Main Heading -->
+        <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight drop-shadow-[0_6px_30px_rgba(0,0,0,.35)]">
+          Coming Soon
+        </h1>
+        
+        <!-- Description -->
         <p class="text-lg md:text-xl text-white/90 leading-relaxed drop-shadow-[0_6px_30px_rgba(0,0,0,.35)]">
-          Our online shop is in the oven! While we perfect the recipe, find us at Sydney markets for <span class="font-semibold">fresh treats & takeaway</span> delights.
+          Our online shop is in the oven! While we perfect the recipe, find us at Sydney markets for 
+          <span class="font-semibold">fresh treats & takeaway</span> delights.
         </p>
+        
         <!-- Events -->
         <div class="mx-auto max-w-xl text-left">
           <ul class="grid gap-3 md:gap-4" id="events-list">
-            <!-- Events will be generated dynamically from EVENTS configuration -->
+            <!-- Events will be generated dynamically -->
           </ul>
         </div>
         
@@ -66,11 +76,11 @@
           </p>
         </div>
         
-        <!-- Socials -->
+        <!-- Social Links -->
         <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4">
           <a class="group relative inline-flex items-center gap-3 px-6 py-4 rounded-2xl bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:from-purple-600 hover:to-pink-600 shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300" href="https://www.instagram.com/oyo_dessert_syd" target="_blank" rel="noopener">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.40z"/>
             </svg>
             <span class="font-semibold">Instagram</span>
             <div class="absolute inset-0 bg-white/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -83,146 +93,21 @@
             <div class="absolute inset-0 bg-white/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </a>
         </div>
+        
       </div>
     </section>
 
     <!-- FOOTER -->
     <footer class="relative z-10 mt-auto">
       <div class="max-w-6xl mx-auto px-4 py-4 md:px-6 md:py-6 text-center text-white/80 text-xs md:text-sm">
-        © <span id="year"></span> OyO Dessert · Sydney, Australia
+        © <span id="year">2024</span> OyO Dessert · Sydney, Australia
       </div>
     </footer>
   </main>
 
-  <!-- Load configuration file -->
+  <!-- Configuration and Application Scripts -->
   <script src="config.js"></script>
-  
-  <script>
-    function generateEventsHTML() {
-      return window.EVENTS.map(event => `
-        <li class="group">
-          <a href="https://www.google.com/maps/search/${event.mapSearch}" target="_blank" rel="noopener" class="flex items-start gap-4 bg-white/20 backdrop-blur rounded-xl px-5 py-4 ring-1 ring-white/30 shadow-glow hover:bg-white/30 hover:ring-white/40 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-            <div class="flex flex-col items-center min-w-[60px] text-center">
-              <span class="text-xs font-medium text-white/70 uppercase tracking-wide">${event.month}</span>
-              <span class="text-2xl font-bold text-white leading-none">${event.day}</span>
-            </div>
-            <div class="flex-1 space-y-1">
-              <div class="text-lg font-semibold text-white leading-tight group-hover:text-white/90">${event.location}</div>
-              <div class="text-white/85 text-base font-medium">${event.time}</div>
-              <div class="text-xs text-white/60 group-hover:text-white/80 transition-colors">📍 Click for directions</div>
-            </div>
-          </a>
-        </li>
-      `).join('');
-    }
+  <script src="js/gallery.js"></script>
 
-    async function generateSlideshowHTML() {
-      // Get all available images from assets/images/ directory
-      const availableImages = await getAvailableImages();
-      
-      if (availableImages.length === 0) {
-        console.warn('No images found in assets/images/');
-        return '';
-      }
-      
-      // Shuffle the images for random display
-      const shuffledImages = shuffleArray([...availableImages]);
-      
-      return shuffledImages.map((image, index) => 
-        `<img class="slide absolute inset-0 w-full h-full object-cover opacity-0" src="./assets/images/${image}" alt="Dessert ${index + 1}">`
-      ).join('');
-    }
-
-    // Function to shuffle an array (Fisher-Yates algorithm)
-    function shuffleArray(array) {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-      }
-      return array;
-    }
-
-    // Function to detect available images by attempting to load them
-    async function getAvailableImages() {
-      const imageExtensions = ['webp', 'jpg', 'jpeg', 'png'];
-      const maxImageNumber = 50; // Reasonable upper limit to check
-      const availableImages = [];
-      
-      // Check for numbered images (IMG_1.webp, IMG_2.webp, etc.)
-      for (let i = 1; i <= maxImageNumber; i++) {
-        for (const ext of imageExtensions) {
-          const filename = `IMG_${i}.${ext}`;
-          if (await imageExists(`./assets/images/${filename}`)) {
-            availableImages.push(filename);
-            break; // Found this number, move to next
-          }
-        }
-      }
-      
-      return availableImages;
-    }
-
-    // Check if an image file exists by attempting to load it
-    function imageExists(src) {
-      return new Promise((resolve) => {
-        const img = new Image();
-        img.onload = () => resolve(true);
-        img.onerror = () => resolve(false);
-        img.src = src;
-      });
-    }
-
-    // 🚀 INITIALIZE WEBSITE
-    document.addEventListener('DOMContentLoaded', async function() {
-      // Set copyright year
-      document.getElementById('year').textContent = new Date().getFullYear();
-      
-      // Generate events HTML
-      const eventsContainer = document.getElementById('events-list');
-      if (eventsContainer) {
-        eventsContainer.innerHTML = generateEventsHTML();
-      }
-      
-      // Generate slideshow HTML (now async)
-      const slidesContainer = document.getElementById('slides');
-      if (slidesContainer) {
-        console.log('🖼️ Loading images dynamically from assets/images/...');
-        const slidesContent = await generateSlideshowHTML();
-        
-        if (slidesContent) {
-          // Keep the background overlay
-          slidesContainer.innerHTML = slidesContent + '<div class="absolute inset-0 bg-black/60"></div>';
-          
-          // Initialize slideshow functionality after images are loaded
-          initializeSlideshow();
-          console.log('✅ Slideshow initialized with dynamically loaded images');
-        } else {
-          console.warn('⚠️ No images found - slideshow will not start');
-        }
-      }
-    });
-
-    function initializeSlideshow() {
-      const slides = Array.from(document.querySelectorAll('.slide'))
-      let i = -1
-      
-      function cycle(){
-        const prev = slides[i]
-        i = (i + 1) % slides.length
-        const next = slides[i]
-        if(prev) prev.style.opacity = 0
-        if(next){
-          next.style.opacity = 1
-          next.style.transition = 'opacity 1.2s ease'
-          next.style.animation = 'zoom 14s ease-in-out both'
-        }
-      }
-      
-      if (slides.length > 0) {
-        cycle()
-        setInterval(cycle, 6000)
-      }
-    }
-  </script>
 </body>
 </html>

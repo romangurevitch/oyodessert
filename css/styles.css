@@ -1,0 +1,53 @@
+/* OyO Dessert - Styles */
+
+/* Root variables and base styles */
+:root { 
+  color-scheme: light; 
+}
+
+/* Accessibility - respect user preferences */
+@media (prefers-reduced-motion: reduce) { 
+  *, ::before, ::after { 
+    animation-duration: 0.01ms !important; 
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important; 
+    scroll-behavior: auto !important;
+  } 
+}
+
+/* TailwindCSS configuration */
+.tailwind-config {
+  /* Custom colors */
+  --cream: #FFF8F0;
+  --blush: #F8E3E7; 
+  --caramel: #C28B6A;
+  --cocoa: #3B2E2A;
+  --charcoal: #222;
+  --pistachio: #B5C98A;
+  --berry: #C24655;
+}
+
+/* Custom animations */
+@keyframes fade {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes zoom {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.12); }
+}
+
+/* Animation utilities */
+.animate-fadeIn {
+  animation: fade 0.8s ease-out both;
+}
+
+.animate-kenburns {
+  animation: zoom 14s ease-in-out both;
+}
+
+/* Custom shadow */
+.shadow-glow {
+  box-shadow: 0 12px 40px rgba(194, 139, 106, 0.28);
+}
