@@ -13,4 +13,4 @@ Allow: /config.js
 Allow: /sitemap.xml
 
 # Sitemap location
-Sitemap: https://oyodessert.com/sitemap.xml
+Sitemap: https://oyodessert.com.au/sitemap.xml
