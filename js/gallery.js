@@ -169,18 +169,22 @@ class OyoApp {
   }
 
   async _initializeGallery() {
-    // Detect all available images
+    // Fast first image: Show IMG_1.webp immediately while loading others
+    const firstImage = 'IMG_1.webp';
+    this.renderer.createSlideshow([firstImage]);
+
+    // Load remaining images in background
     const images = await this.imageDetector.detectAvailableImages();
     
-    if (images.length === 0) {
-      console.warn('No images found');
-      return;
+    if (images.length <= 1) {
+      return; // Only one or no images, keep current setup
     }
 
-    // Shuffle images for variety
-    const shuffledImages = ImageShuffler.shuffle(images);
+    // Remove first image from list if it exists, shuffle rest
+    const otherImages = images.filter(img => img !== firstImage);
+    const shuffledImages = [firstImage, ...ImageShuffler.shuffle(otherImages)];
 
-    // Create slideshow structure
+    // Update slideshow with all images
     this.renderer.createSlideshow(shuffledImages);
 
     // Start slideshow after 6 seconds (let first image show)
