@@ -60,15 +60,33 @@ class SlideshowRenderer {
     if (!this.container) return;
 
     const slidesHTML = images.map((img, index) => 
-      `<img class="absolute inset-0 w-full h-full object-cover ${index === 0 ? 'opacity-100' : 'opacity-0'}" 
+      `<img class="absolute inset-0 w-full h-full object-cover opacity-0" 
             src="./assets/images/${img}" 
             alt="OyO Dessert"
             loading="${index === 0 ? 'eager' : 'lazy'}"
-            style="transition: opacity 1s ease; ${index === 0 ? 'animation: zoom 14s ease-in-out both;' : ''}">`
+            style="transition: opacity 1s ease;">`
     ).join('');
 
     this.container.innerHTML = slidesHTML + '<div class="absolute inset-0 bg-black/60"></div>';
     this.slides = this.container.querySelectorAll('img');
+
+    // Make first image fade in when loaded
+    if (this.slides.length > 0) {
+      const firstSlide = this.slides[0];
+      
+      if (firstSlide.complete) {
+        // Already loaded
+        this._showFirstSlide(firstSlide);
+      } else {
+        // Wait for load
+        firstSlide.onload = () => this._showFirstSlide(firstSlide);
+      }
+    }
+  }
+
+  _showFirstSlide(slide) {
+    slide.style.opacity = '1';
+    slide.style.animation = 'zoom 14s ease-in-out both';
   }
 
   showSlide(index) {
