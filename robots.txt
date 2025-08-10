@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /
+Disallow: /css/
+Disallow: /js/
+Disallow: /.git/
+Disallow: /.claude/
+Disallow: /.serena/
+Disallow: /.idea/
+
+# Allow important files
+Allow: /assets/
+Allow: /config.js
+Allow: /sitemap.xml
+
+# Sitemap location
+Sitemap: https://oyodessert.com/sitemap.xml
