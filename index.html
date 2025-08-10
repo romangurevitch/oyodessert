@@ -43,7 +43,7 @@
         <div class="flex justify-center">
           <div class="group cursor-default">
             <img alt="OyO Dessert logo" class="w-24 h-24 md:w-32 md:h-32 lg:w-36 lg:h-36 rounded-2xl md:rounded-3xl bg-white/95 ring-2 ring-white/70 shadow-2xl object-cover backdrop-blur-sm transform group-hover:scale-105 transition-all duration-500 ease-out hover:shadow-3xl"
-                 src="./assets/images/logo.png" />
+                 src="./assets/logo/logo.png" />
             <div class="absolute inset-0 rounded-2xl md:rounded-3xl bg-gradient-to-t from-black/5 via-transparent to-white/5 opacity-30 group-hover:opacity-50 transition-opacity duration-500"></div>
           </div>
         </div>
@@ -116,14 +116,64 @@
       `).join('');
     }
 
-    function generateSlideshowHTML() {
-      return window.SLIDESHOW_IMAGES.map((image, index) => 
+    async function generateSlideshowHTML() {
+      // Get all available images from assets/images/ directory
+      const availableImages = await getAvailableImages();
+      
+      if (availableImages.length === 0) {
+        console.warn('No images found in assets/images/');
+        return '';
+      }
+      
+      // Shuffle the images for random display
+      const shuffledImages = shuffleArray([...availableImages]);
+      
+      return shuffledImages.map((image, index) => 
         `<img class="slide absolute inset-0 w-full h-full object-cover opacity-0" src="./assets/images/${image}" alt="Dessert ${index + 1}">`
       ).join('');
     }
 
+    // Function to shuffle an array (Fisher-Yates algorithm)
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    // Function to detect available images by attempting to load them
+    async function getAvailableImages() {
+      const imageExtensions = ['webp', 'jpg', 'jpeg', 'png'];
+      const maxImageNumber = 50; // Reasonable upper limit to check
+      const availableImages = [];
+      
+      // Check for numbered images (IMG_1.webp, IMG_2.webp, etc.)
+      for (let i = 1; i <= maxImageNumber; i++) {
+        for (const ext of imageExtensions) {
+          const filename = `IMG_${i}.${ext}`;
+          if (await imageExists(`./assets/images/${filename}`)) {
+            availableImages.push(filename);
+            break; // Found this number, move to next
+          }
+        }
+      }
+      
+      return availableImages;
+    }
+
+    // Check if an image file exists by attempting to load it
+    function imageExists(src) {
+      return new Promise((resolve) => {
+        const img = new Image();
+        img.onload = () => resolve(true);
+        img.onerror = () => resolve(false);
+        img.src = src;
+      });
+    }
+
     // 🚀 INITIALIZE WEBSITE
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', async function() {
       // Set copyright year
       document.getElementById('year').textContent = new Date().getFullYear();
       
@@ -133,16 +183,23 @@
         eventsContainer.innerHTML = generateEventsHTML();
       }
       
-      // Generate slideshow HTML  
+      // Generate slideshow HTML (now async)
       const slidesContainer = document.getElementById('slides');
-      const slidesContent = generateSlideshowHTML();
       if (slidesContainer) {
-        // Keep the background overlay
-        slidesContainer.innerHTML = slidesContent + '<div class="absolute inset-0 bg-black/60"></div>';
+        console.log('🖼️ Loading images dynamically from assets/images/...');
+        const slidesContent = await generateSlideshowHTML();
+        
+        if (slidesContent) {
+          // Keep the background overlay
+          slidesContainer.innerHTML = slidesContent + '<div class="absolute inset-0 bg-black/60"></div>';
+          
+          // Initialize slideshow functionality after images are loaded
+          initializeSlideshow();
+          console.log('✅ Slideshow initialized with dynamically loaded images');
+        } else {
+          console.warn('⚠️ No images found - slideshow will not start');
+        }
       }
-      
-      // Initialize slideshow functionality
-      initializeSlideshow();
     });
 
     function initializeSlideshow() {

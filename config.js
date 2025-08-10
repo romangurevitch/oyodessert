@@ -15,8 +15,9 @@ Add a new object to the EVENTS array with:
 - mapSearch: Location name for Google Maps (replace spaces with +)
 
 ADDING IMAGES:
-Add the filename to SLIDESHOW_IMAGES array.
-Images should be in WebP format in assets/images/
+Simply add your image files to the assets/images/ directory!
+The website will automatically detect and display all images.
+Images should be in WebP format and follow the naming pattern IMG_1.webp, IMG_2.webp, etc.
 
 Example of adding a new event:
 {
@@ -28,7 +29,7 @@ Example of adding a new event:
 }
 
 Example of adding a new image:
-Just add 'IMG_38.webp' to the array below.
+Just drop 'IMG_38.webp' into the assets/images/ folder - no code changes needed!
 */
 
 // 📅 EVENTS CONFIGURATION - Easy to update!
@@ -49,18 +50,12 @@ const EVENTS = [
   }
 ];
 
-// 🖼️ SLIDESHOW IMAGES CONFIGURATION - Easy to update!
-const SLIDESHOW_IMAGES = [
-  'IMG_1.webp',
-  'IMG_2.webp', 
-  'IMG_3.webp',
-  'IMG_4.webp',
-  'IMG_5.webp',
-  'IMG_6.webp'
-];
+// 🖼️ SLIDESHOW IMAGES - Now loaded automatically! 
+// No manual configuration needed - just add images to assets/images/
+// The website will automatically detect all IMG_*.webp files and display them randomly.
 
 // Export for use in main website (keep this line)
 if (typeof window !== 'undefined') {
   window.EVENTS = EVENTS;
-  window.SLIDESHOW_IMAGES = SLIDESHOW_IMAGES;
+  // SLIDESHOW_IMAGES no longer needed - images are loaded dynamically!
 }
