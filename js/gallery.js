@@ -1,148 +1,140 @@
-/**
- * OyO Dessert Gallery - Simple & Fast Image Gallery
- * Following SOLID principles with separation of concerns
- */
-
-// Single Responsibility: ImageDetector only handles image detection
 class ImageDetector {
-  constructor(config = {}) {
-    this.config = {
-      maxImageNumber: 40,
-      imageDirectory: './assets/images/',
-      imagePattern: 'IMG_',
-      imageExtension: '.webp',
-      ...config
-    };
-  }
-
-  async detectAvailableImages() {
-    const promises = [];
-    
-    for (let i = 1; i <= this.config.maxImageNumber; i++) {
-      promises.push(this._checkImage(i));
+    constructor(config = {}) {
+        this.config = {
+            maxImageNumber: 40,
+            imageDirectory: './assets/images/',
+            imagePattern: 'IMG_',
+            imageExtension: '.webp',
+            ...config
+        };
     }
-    
-    const results = await Promise.all(promises);
-    return results.filter(filename => filename !== null);
-  }
 
-  _checkImage(num) {
-    return new Promise(resolve => {
-      const img = new Image();
-      const filename = `${this.config.imagePattern}${num}${this.config.imageExtension}`;
-      img.onload = () => resolve(filename);
-      img.onerror = () => resolve(null);
-      img.src = `${this.config.imageDirectory}${filename}`;
-    });
-  }
+    async detectAvailableImages() {
+        const promises = [];
+
+        for (let i = 1; i <= this.config.maxImageNumber; i++) {
+            promises.push(this._checkImage(i));
+        }
+
+        const results = await Promise.all(promises);
+        return results.filter(filename => filename !== null);
+    }
+
+    _checkImage(num) {
+        return new Promise(resolve => {
+            const img = new Image();
+            const filename = `${this.config.imagePattern}${num}${this.config.imageExtension}`;
+            img.onload = () => resolve(filename);
+            img.onerror = () => resolve(null);
+            img.src = `${this.config.imageDirectory}${filename}`;
+        });
+    }
 }
 
-// Single Responsibility: ImageShuffler only handles shuffling logic
 class ImageShuffler {
-  static shuffle(array) {
-    const shuffled = [...array];
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    static shuffle(array) {
+        const shuffled = [...array];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        return shuffled;
     }
-    return shuffled;
-  }
 }
 
-// Single Responsibility: SlideshowRenderer only handles DOM creation and transitions
 class SlideshowRenderer {
-  constructor(containerSelector) {
-    this.container = document.querySelector(containerSelector);
-    this.slides = [];
-  }
+    constructor(containerSelector) {
+        this.container = document.querySelector(containerSelector);
+        this.slides = [];
+    }
 
-  createSlideshow(images) {
-    if (!this.container) return;
+    createSlideshow(images) {
+        if (!this.container) return;
 
-    const slidesHTML = images.map((img, index) => 
-      `<img class="absolute inset-0 w-full h-full object-cover opacity-0" 
+        const slidesHTML = images.map((img, index) =>
+            `<img class="absolute inset-0 w-full h-full object-cover opacity-0" 
             src="./assets/images/${img}" 
             alt="OyO Dessert"
             loading="${index === 0 ? 'eager' : 'lazy'}"
             style="transition: opacity 1s ease;">`
-    ).join('');
+        ).join('');
 
-    this.container.innerHTML = slidesHTML + '<div class="absolute inset-0 bg-black/60"></div>';
-    this.slides = this.container.querySelectorAll('img');
+        this.container.innerHTML = slidesHTML + '<div class="absolute inset-0 bg-black/60"></div>';
+        this.slides = this.container.querySelectorAll('img');
+        if (this.slides.length > 0) {
+            const firstSlide = this.slides[0];
 
-    // Make first image fade in when loaded
-    if (this.slides.length > 0) {
-      const firstSlide = this.slides[0];
-      
-      if (firstSlide.complete) {
-        // Already loaded
-        this._showFirstSlide(firstSlide);
-      } else {
-        // Wait for load
-        firstSlide.onload = () => this._showFirstSlide(firstSlide);
-      }
+            if (firstSlide.complete) {
+                this._showFirstSlide(firstSlide);
+            } else {
+                firstSlide.onload = () => this._showFirstSlide(firstSlide);
+            }
+        }
     }
-  }
 
-  _showFirstSlide(slide) {
-    slide.style.opacity = '1';
-    slide.style.animation = 'zoom 14s ease-in-out both';
-  }
-
-  showSlide(index) {
-    // Hide all slides
-    this.slides.forEach(slide => slide.style.opacity = '0');
-
-    // Show selected slide
-    const slide = this.slides[index];
-    if (slide) {
-      slide.style.opacity = '1';
-      slide.style.transition = 'opacity 1s ease';
-      slide.style.animation = 'zoom 14s ease-in-out both';
+    _showFirstSlide(slide) {
+        slide.style.opacity = '1';
+        slide.style.animation = 'zoom 14s ease-in-out both';
     }
-  }
 
-  getSlideCount() {
-    return this.slides.length;
-  }
+    showLoadingSkeleton() {
+        if (!this.container) return;
+
+        this.container.innerHTML = `
+      <div class="absolute inset-0 image-skeleton"></div>
+      <div class="absolute inset-0 bg-black/60"></div>
+    `;
+    }
+
+    showSlide(index) {
+        this.slides.forEach(slide => slide.style.opacity = '0');
+        const slide = this.slides[index];
+        if (slide) {
+            slide.style.opacity = '1';
+            slide.style.transition = 'opacity 1s ease';
+            slide.style.animation = 'zoom 14s ease-in-out both';
+        }
+    }
+
+    getSlideCount() {
+        return this.slides.length;
+    }
 }
 
-// Single Responsibility: SlideshowController manages slideshow timing and state
 class SlideshowController {
-  constructor(renderer) {
-    this.renderer = renderer;
-    this.currentIndex = 0;
-    this.intervalId = null;
-    this.intervalDuration = 6000; // 6 seconds
-  }
-
-  start() {
-    if (this.renderer.getSlideCount() <= 1) return;
-
-    this.intervalId = setInterval(() => {
-      this.currentIndex = (this.currentIndex + 1) % this.renderer.getSlideCount();
-      this.renderer.showSlide(this.currentIndex);
-    }, this.intervalDuration);
-  }
-
-  stop() {
-    if (this.intervalId) {
-      clearInterval(this.intervalId);
-      this.intervalId = null;
+    constructor(renderer) {
+        this.renderer = renderer;
+        this.currentIndex = 0;
+        this.intervalId = null;
+        this.intervalDuration = 6000;
     }
-  }
+
+    start() {
+        if (this.renderer.getSlideCount() <= 1) return;
+
+        this.intervalId = setInterval(() => {
+            this.currentIndex = (this.currentIndex + 1) % this.renderer.getSlideCount();
+            this.renderer.showSlide(this.currentIndex);
+        }, this.intervalDuration);
+    }
+
+    stop() {
+        if (this.intervalId) {
+            clearInterval(this.intervalId);
+            this.intervalId = null;
+        }
+    }
 }
 
-// Single Responsibility: EventRenderer only handles event display
 class EventRenderer {
-  constructor(containerSelector) {
-    this.container = document.querySelector(containerSelector);
-  }
+    constructor(containerSelector) {
+        this.container = document.querySelector(containerSelector);
+    }
 
-  render(events) {
-    if (!this.container || !events) return;
+    render(events) {
+        if (!this.container || !events) return;
 
-    this.container.innerHTML = events.map(event => `
+        this.container.innerHTML = events.map(event => `
       <li class="group">
         <a href="https://www.google.com/maps/search/${event.mapSearch}" target="_blank" rel="noopener" class="flex items-start gap-4 bg-white/20 backdrop-blur rounded-xl px-5 py-4 ring-1 ring-white/30 shadow-glow hover:bg-white/30 hover:ring-white/40 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
           <div class="flex flex-col items-center min-w-[60px] text-center">
@@ -151,96 +143,83 @@ class EventRenderer {
           </div>
           <div class="flex-1 space-y-1">
             <div class="text-lg font-semibold text-white leading-tight group-hover:text-white/90">${event.location}</div>
+            <div class="text-sm text-white/75 font-medium">${event.suburb || ''}</div>
             <div class="text-white/85 text-base font-medium">${event.time}</div>
             <div class="text-xs text-white/60 group-hover:text-white/80 transition-colors">📍 Click for directions</div>
           </div>
         </a>
       </li>
     `).join('');
-  }
+    }
 }
 
-// Dependency Inversion: App depends on abstractions, not implementations
 class OyoApp {
-  constructor() {
-    // Dependency injection - easy to swap implementations
-    this.imageDetector = new ImageDetector();
-    this.renderer = new SlideshowRenderer('#slides');
-    this.controller = new SlideshowController(this.renderer);
-    this.eventRenderer = new EventRenderer('#events-list');
-  }
-
-  async initialize() {
-    try {
-      // Set copyright year
-      this._updateYear();
-
-      // Render events
-      this._renderEvents();
-
-      // Initialize gallery
-      await this._initializeGallery();
-
-    } catch (error) {
-      console.error('Failed to initialize OyO Dessert app:', error);
-    }
-  }
-
-  async _initializeGallery() {
-    // Fast first image: Show IMG_1.webp immediately while loading others
-    const firstImage = 'IMG_1.webp';
-    this.renderer.createSlideshow([firstImage]);
-
-    // Load remaining images in background
-    const images = await this.imageDetector.detectAvailableImages();
-    
-    if (images.length <= 1) {
-      return; // Only one or no images, keep current setup
+    constructor() {
+        this.imageDetector = new ImageDetector();
+        this.renderer = new SlideshowRenderer('#slides');
+        this.controller = new SlideshowController(this.renderer);
+        this.eventRenderer = new EventRenderer('#events-list');
     }
 
-    // Remove first image from list if it exists, shuffle rest
-    const otherImages = images.filter(img => img !== firstImage);
-    const shuffledImages = [firstImage, ...ImageShuffler.shuffle(otherImages)];
-
-    // Update slideshow with all images
-    this.renderer.createSlideshow(shuffledImages);
-
-    // Start slideshow after 6 seconds (let first image show)
-    setTimeout(() => {
-      this.controller.start();
-    }, 6000);
-  }
-
-  _updateYear() {
-    const yearElement = document.getElementById('year');
-    if (yearElement) {
-      yearElement.textContent = new Date().getFullYear();
+    async initialize() {
+        try {
+            this._updateYear();
+            this._renderEvents();
+            await this._initializeGallery();
+        } catch (error) {
+            console.error('Failed to initialize OyO Dessert app:', error);
+        }
     }
-  }
 
-  _renderEvents() {
-    if (window.EVENTS) {
-      this.eventRenderer.render(window.EVENTS);
+    async _initializeGallery() {
+        this.renderer.showLoadingSkeleton();
+
+        const firstImage = 'IMG_1.webp';
+        this.renderer.createSlideshow([firstImage]);
+
+        const images = await this.imageDetector.detectAvailableImages();
+
+        if (images.length <= 1) {
+            return;
+        }
+
+        const otherImages = images.filter(img => img !== firstImage);
+        const shuffledImages = [firstImage, ...ImageShuffler.shuffle(otherImages)];
+
+        this.renderer.createSlideshow(shuffledImages);
+
+        setTimeout(() => {
+            this.controller.start();
+        }, 6000);
     }
-  }
 
-  // Public API for external control (if needed)
-  pauseSlideshow() {
-    this.controller.stop();
-  }
+    _updateYear() {
+        const yearElement = document.getElementById('year');
+        if (yearElement) {
+            yearElement.textContent = new Date().getFullYear();
+        }
+    }
 
-  resumeSlideshow() {
-    this.controller.start();
-  }
+    _renderEvents() {
+        if (window.EVENTS) {
+            this.eventRenderer.render(window.EVENTS);
+        }
+    }
+
+    pauseSlideshow() {
+        this.controller.stop();
+    }
+
+    resumeSlideshow() {
+        this.controller.start();
+    }
 }
 
-// Initialize app when DOM is ready
-document.addEventListener('DOMContentLoaded', function() {
-  const app = new OyoApp();
-  app.initialize();
-  
-  // Expose app globally for debugging (development only)
-  if (typeof window !== 'undefined') {
-    window.oyoApp = app;
-  }
+document.addEventListener('DOMContentLoaded', function () {
+    const app = new OyoApp();
+    app.initialize();
+
+    if (typeof window !== 'undefined') {
+        window.oyoApp = app;
+    }
 });
