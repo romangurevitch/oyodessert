@@ -174,23 +174,25 @@ class OyoApp {
     async _initializeGallery() {
         this.renderer.showLoadingSkeleton();
 
-        const firstImage = 'IMG_1.webp';
-        this.renderer.createSlideshow([firstImage]);
-
         const images = await this.imageDetector.detectAvailableImages();
-
-        if (images.length <= 1) {
+        
+        if (images.length === 0) {
             return;
         }
 
+        const firstImage = 'IMG_1.webp';
         const otherImages = images.filter(img => img !== firstImage);
-        const shuffledImages = [firstImage, ...ImageShuffler.shuffle(otherImages)];
+        const shuffledImages = images.includes(firstImage) 
+            ? [firstImage, ...ImageShuffler.shuffle(otherImages)]
+            : ImageShuffler.shuffle(images);
 
         this.renderer.createSlideshow(shuffledImages);
 
-        setTimeout(() => {
-            this.controller.start();
-        }, 6000);
+        if (shuffledImages.length > 1) {
+            setTimeout(() => {
+                this.controller.start();
+            }, 6000);
+        }
     }
 
     _updateYear() {
