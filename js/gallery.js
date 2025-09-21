@@ -133,27 +133,151 @@ class SlideshowController {
 class EventRenderer {
     constructor(containerSelector) {
         this.container = document.querySelector(containerSelector);
+        this.monthOrder = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    }
+
+    filterAndSortEvents(events, config) {
+        if (!events || !Array.isArray(events)) return { events: [], hasMore: false };
+
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        // Get display configuration
+        const displayConfig = config || window.EVENT_DISPLAY_CONFIG || {
+            MAX_EVENTS_TO_SHOW: 999,
+            DAYS_AHEAD_LIMIT: 0,
+            SHOW_MORE_INDICATOR: false
+        };
+
+        // Filter out past and cancelled events, include tentative with indicator
+        let upcomingEvents = events.filter(event => {
+            // Skip cancelled events
+            if (event.status === 'cancelled') return false;
+
+            // Create date object for the event
+            const eventDate = new Date(
+                event.year || today.getFullYear(),
+                this.monthOrder.indexOf(event.month),
+                event.day
+            );
+            eventDate.setHours(23, 59, 59, 999); // Set to end of day
+
+            // Keep if event is today or in the future
+            return eventDate >= today;
+        });
+
+        // Apply days ahead limit if configured
+        if (displayConfig.DAYS_AHEAD_LIMIT > 0) {
+            const limitDate = new Date(today);
+            limitDate.setDate(limitDate.getDate() + displayConfig.DAYS_AHEAD_LIMIT);
+
+            upcomingEvents = upcomingEvents.filter(event => {
+                const eventDate = new Date(
+                    event.year || today.getFullYear(),
+                    this.monthOrder.indexOf(event.month),
+                    event.day
+                );
+                return eventDate <= limitDate;
+            });
+        }
+
+        // Sort events chronologically
+        upcomingEvents.sort((a, b) => {
+            const dateA = new Date(
+                a.year || today.getFullYear(),
+                this.monthOrder.indexOf(a.month),
+                a.day
+            );
+            const dateB = new Date(
+                b.year || today.getFullYear(),
+                this.monthOrder.indexOf(b.month),
+                b.day
+            );
+            return dateA - dateB;
+        });
+
+        // Check if there are more events than we're showing
+        const hasMoreEvents = upcomingEvents.length > displayConfig.MAX_EVENTS_TO_SHOW;
+
+        // Limit the number of events to show
+        const eventsToShow = upcomingEvents.slice(0, displayConfig.MAX_EVENTS_TO_SHOW);
+
+        return {
+            events: eventsToShow,
+            hasMore: hasMoreEvents && displayConfig.SHOW_MORE_INDICATOR,
+            totalUpcoming: upcomingEvents.length
+        };
+    }
+
+    getEventTypeIcon(type) {
+        const icons = {
+            market: '🛍️',
+            popup: '🎪',
+            special: '✨',
+            festival: '🎉'
+        };
+        return icons[type] || '📍';
     }
 
     render(events) {
-        if (!this.container || !events) return;
+        if (!this.container) return;
 
-        this.container.innerHTML = events.map(event => `
+        const result = this.filterAndSortEvents(events);
+        const filteredEvents = result.events;
+
+        if (filteredEvents.length === 0) {
+            this.container.innerHTML = `
+                <li class="text-center text-white/70 py-8">
+                    <p class="text-lg">No upcoming events scheduled.</p>
+                    <p class="text-sm mt-2">Follow us on social media for updates!</p>
+                </li>
+            `;
+            return;
+        }
+
+        let eventsHTML = filteredEvents.map(event => {
+            const isTentative = event.status === 'tentative';
+            const eventIcon = this.getEventTypeIcon(event.type);
+
+            return `
       <li class="group">
         <a href="https://www.google.com/maps/search/${event.mapSearch}" target="_blank" rel="noopener" class="flex items-start gap-4 bg-white/20 backdrop-blur rounded-xl px-5 py-4 ring-1 ring-white/30 shadow-glow hover:bg-white/30 hover:ring-white/40 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
           <div class="flex flex-col items-center min-w-[60px] text-center">
             <span class="text-xs font-medium text-white/70 uppercase tracking-wide">${event.month}</span>
             <span class="text-2xl font-bold text-white leading-none">${event.day}</span>
+            ${event.year && event.year !== new Date().getFullYear() ? `<span class="text-xs text-white/60 mt-1">${event.year}</span>` : ''}
           </div>
           <div class="flex-1 space-y-1">
-            <div class="text-lg font-semibold text-white leading-tight group-hover:text-white/90">${event.location}</div>
-            <div class="text-sm text-white/75 font-medium">${event.suburb || ''}</div>
+            <div class="flex items-center gap-2">
+                <span class="text-lg">${eventIcon}</span>
+                <div class="text-lg font-semibold text-white leading-tight group-hover:text-white/90">
+                    ${event.location}
+                    ${isTentative ? '<span class="text-xs text-yellow-400/80 ml-2">(Tentative)</span>' : ''}
+                </div>
+            </div>
+            ${event.suburb ? `<div class="text-sm text-white/75 font-medium">${event.suburb}</div>` : ''}
             <div class="text-white/85 text-base font-medium">${event.time}</div>
+            ${event.notes ? `<div class="text-xs text-white/70 italic">${event.notes}</div>` : ''}
+            ${event.recurring ? `<div class="text-xs text-white/60">🔄 ${event.recurring.charAt(0).toUpperCase() + event.recurring.slice(1)} event</div>` : ''}
             <div class="text-xs text-white/60 group-hover:text-white/80 transition-colors">📍 Click for directions</div>
           </div>
         </a>
       </li>
-    `).join('');
+    `;
+        }).join('');
+
+        // Add "more events" indicator if there are hidden events
+        if (result.hasMore) {
+            eventsHTML += `
+                <li class="text-center pt-4">
+                    <p class="text-sm text-white/70 italic">
+                        ✨ More events coming! Follow our social media for the full schedule.
+                    </p>
+                </li>
+            `;
+        }
+
+        this.container.innerHTML = eventsHTML;
     }
 }
 
