@@ -46,6 +46,17 @@ const EVENTS = [
     },
     {
         year: 2025,
+        month: 'Nov',
+        day: 23,
+        location: 'Southpoint Shopping Centre',
+        suburb: 'Hillsdale',
+        time: '9:00 AM – 4:00 PM',
+        mapSearch: 'Southpoint+Shopping+Centre',
+        type: 'shopping centre',
+        status: 'confirmed',
+    },
+    {
+        year: 2025,
         month: 'Dec',
         day: 7,
         location: 'Kirribilli Markets',
