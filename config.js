@@ -79,7 +79,7 @@ const EVENTS = [
     },
     {
         year: 2026,
-        month: 'March',
+        month: 'Mar',
         day: 1,
         location: 'Kirribilli Markets',
         suburb: 'North Sydney',
@@ -90,7 +90,7 @@ const EVENTS = [
     },
     {
         year: 2026,
-        month: 'March',
+        month: 'Mar',
         day: 8,
         location: 'Kirribilli Markets',
         suburb: 'North Sydney',
