@@ -77,6 +77,28 @@ const EVENTS = [
         type: 'market',
         status: 'confirmed',
     },
+    {
+        year: 2026,
+        month: 'March',
+        day: 1,
+        location: 'Kirribilli Markets',
+        suburb: 'North Sydney',
+        time: '8:30 AM – 3:00 PM',
+        mapSearch: 'Kirribilli+Markets+Sydney',
+        type: 'market',
+        status: 'confirmed',
+    },
+    {
+        year: 2026,
+        month: 'March',
+        day: 8,
+        location: 'Kirribilli Markets',
+        suburb: 'North Sydney',
+        time: '8:30 AM – 3:00 PM',
+        mapSearch: 'Kirribilli+Markets+Sydney',
+        type: 'market',
+        status: 'confirmed',
+    },
 ];
 
 /**
