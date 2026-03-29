@@ -79,6 +79,17 @@ const EVENTS = [
     {
         year: 2026,
         month: 'Jun',
+        day: 21,
+        location: 'Flour Mill Market',
+        suburb: 'Summer Hill',
+        time: '9:00 AM – 1:00 PM',
+        mapSearch: 'Flour+Mill+Market+Summer+Hill',
+        type: 'market',
+        status: 'confirmed',
+    },
+    {
+        year: 2026,
+        month: 'Jun',
         day: 27,
         location: 'Kirribilli Markets',
         suburb: 'North Sydney',
