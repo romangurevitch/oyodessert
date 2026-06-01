@@ -4,9 +4,9 @@
 
 // Display Configuration - Control how many events show on the website
 const EVENT_DISPLAY_CONFIG = {
-    MAX_EVENTS_TO_SHOW: 10,       // Maximum number of upcoming events to display
+    MAX_EVENTS_TO_SHOW: 2,        // Maximum number of upcoming events to display
     DAYS_AHEAD_LIMIT: 365,        // Only show events within this many days (0 = no limit)
-    SHOW_MORE_INDICATOR: false    // Show "Follow us for more events" when there are hidden events
+    SHOW_MORE_INDICATOR: true     // Show "Follow us for more events" when there are hidden events
 };
 
 const EVENTS = [
