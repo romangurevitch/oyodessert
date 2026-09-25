@@ -282,9 +282,9 @@ describe('Integration Tests - Feature Verification', () => {
 
       // Simulate production config
       const events = [
-        { year: 2025, month: 'Oct', day: 6, location: 'Mona Vale Spring Festival', suburb: 'Mona Vale', time: '10:00 AM – 4:00 PM', mapSearch: 'Mona+Vale+Village+Park+Sydney', type: 'festival', status: 'confirmed', notes: 'Join us at the Spring Festival!' },
-        { year: 2025, month: 'Oct', day: 12, location: 'Kirribilli Markets', suburb: 'North Sydney', time: '8:30 AM – 3:00 PM', mapSearch: 'Kirribilli+Markets+Sydney', type: 'market', status: 'confirmed' },
-        { year: 2025, month: 'Nov', day: 9, location: 'Kirribilli Markets', suburb: 'North Sydney', time: '8:30 AM – 3:00 PM', mapSearch: 'Kirribilli+Markets+Sydney', type: 'market', status: 'confirmed' }
+        { year: 2025, month: 'Oct', day: 6, location: 'Mona Vale Spring Festival', suburb: 'Mona Vale', time: '10:00 AM - 4:00 PM', mapSearch: 'Mona+Vale+Village+Park+Sydney', type: 'festival', status: 'confirmed', notes: 'Join us at the Spring Festival!' },
+        { year: 2025, month: 'Oct', day: 12, location: 'Kirribilli Markets', suburb: 'North Sydney', time: '8:30 AM - 3:00 PM', mapSearch: 'Kirribilli+Markets+Sydney', type: 'market', status: 'confirmed' },
+        { year: 2025, month: 'Nov', day: 9, location: 'Kirribilli Markets', suburb: 'North Sydney', time: '8:30 AM - 3:00 PM', mapSearch: 'Kirribilli+Markets+Sydney', type: 'market', status: 'confirmed' }
       ];
 
       const eventConfig = {
